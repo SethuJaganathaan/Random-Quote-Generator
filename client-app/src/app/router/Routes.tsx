@@ -1,14 +1,14 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../../App";
-import AllQuote from "../../feature/AllQuote";
-import RandomQuote from "../../feature/RandomQuote";
+import RandomQuote from "../../feature/Homepage";
+import Homepage from "../../feature/Homepage";
 
 export const routes: RouteObject[] = [
     {
         path : '/',
         element: <App />,
         children: [
-            { path: 'All', element: <AllQuote />},
+            { path: 'Homepage', element: <Homepage />},
             { path: 'random', element: <RandomQuote />}
         ]
     }

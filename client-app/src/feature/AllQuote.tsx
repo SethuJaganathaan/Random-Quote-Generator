@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardMeta, Container } from "semantic-ui-react";
+import { Card, CardContent, CardDescription, CardMeta, Container } from "semantic-ui-react";
 
 interface Quote {
     quoteId: string;
@@ -8,6 +8,8 @@ interface Quote {
     author: string;
     createdAt: string;
 }
+
+// http://localhost:5012/Quote/RandomQuote
 
 const AllQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<Quote[]>([]);
