@@ -1,13 +1,16 @@
-import { Card, CardHeader, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
+import NavBar from './app/layout/NavBar'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
   return (
-    <Card>
-      <CardHeader>
-        Hello Senpai
-      </CardHeader>
-    </Card>
+    <>
+      <NavBar />
+      <Container style={{ marginTop: "7em" }}>
+        <Outlet />
+      </Container>
+    </>
   )
 }
 
