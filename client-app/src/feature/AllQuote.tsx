@@ -35,7 +35,7 @@ const AllQuote: React.FC = () => {
     return (
         <Container>
             {quotes.map((quote, index) => (
-                <Card key={index}>
+                <Card key={index} style={{ width: '500px' }}>
                     <CardContent>
                         <CardDescription>{quote.quoteText}</CardDescription>
                         <p>{quote.author}</p>
