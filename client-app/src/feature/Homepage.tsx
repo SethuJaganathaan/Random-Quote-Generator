@@ -1,4 +1,4 @@
-import { Button, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import AllQuote from "./AllQuote";
 import RandomQuote from "./RandomQuote";
 
