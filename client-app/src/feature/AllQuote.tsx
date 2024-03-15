@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Container } from "semantic-ui-react";
+import { Card, CardContent, CardDescription, CardHeader, CardMeta, Container } from "semantic-ui-react";
 
 interface Quote {
     quoteId: string;
@@ -16,7 +16,10 @@ const AllQuote: React.FC = () => {
         const fetchQuotes = async () => {
             try {
                 const response = await axios.get<Quote[]>('http://localhost:5012/Quote');
-                setQuotes(response.data);
+                setQuotes(response.data.map(quote => ({
+                    ...quote,
+                    createdAt: new Date(quote.createdAt).toLocaleDateString() 
+                })));
                 console.log(response.data);
             }
             catch (error) {
@@ -30,11 +33,13 @@ const AllQuote: React.FC = () => {
     return (
         <Container>
             {quotes.map((quote, index) => (
-                <div key={index}>
-                    <p>Quote: {quote.quoteText}</p>
-                    <p>Author: {quote.author}</p>
-                    <p>Date: {quote.createdAt}</p>
-                </div>
+                <Card key={index}>
+                    <CardContent>
+                        <CardDescription>{quote.quoteText}</CardDescription>
+                        <p>{quote.author}</p>
+                        <CardMeta>Date:{quote.createdAt}</CardMeta>
+                    </CardContent>
+                </Card>
             ))}
         </Container>
     );
