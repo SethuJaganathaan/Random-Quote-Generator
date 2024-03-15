@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <Container style={{ marginTop: "7em" }}>
+      <Container style={{ marginTop: "5em" }}>
         <Outlet />
       </Container>
     </>
