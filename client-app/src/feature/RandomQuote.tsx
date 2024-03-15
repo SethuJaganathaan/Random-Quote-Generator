@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Container } from "semantic-ui-react"
+import { Button, Card, CardContent, CardDescription, CardMeta, Container } from "semantic-ui-react"
 
 const RandomQuote = () => {
     return (
