@@ -1,0 +1,12 @@
+.ui.card>.content>.header:not(.ui),
+.ui.cards>.card>.content>.header:not(.ui) {
+    font-weight: 700;
+    font-size: 1.28571429em;
+    margin-top: -.21425em;
+    line-height: 1.28571429em;
+    text-align: center;
+}
+
+.formdatta {
+    margin-top: 1.5em;
+}

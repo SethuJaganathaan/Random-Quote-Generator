@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Button, Card, CardContent, CardHeader, Container, Form, FormTextArea, Label } from 'semantic-ui-react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddQuote = () => {
   const [quote, setQuote] = useState({
     quoteText: '',
     author: ''
   });
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -19,64 +23,68 @@ const AddQuote = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // Validate QuoteText
     if (!quote.quoteText || !quote.quoteText.trim()) {
-      setMessage('Quote Text cannot be empty');
+      toast.error('Quote Text cannot be empty');
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:5012/Quote', {
+      await axios.post('http://localhost:5012/Quote', {
         quoteText: quote.quoteText,
         author: quote.author
       });
-      
-      setMessage(response.data);
+
       setQuote({
         quoteText: '',
         author: ''
       });
-    } catch (error: any) {
+
+      toast.success('Quote created successfully!', {
+        autoClose: 2000,
+        onClose: () => {
+          navigate('/Homepage');
+        }
+      });
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data) {
-        setMessage(error.response.data);
+        toast.error(error.response.data);
       } else {
-        setMessage('Failed to create quote');
+        toast.error('Failed to create quote');
       }
     }
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">Create New Quote</h5>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="quoteText" className="form-label">Quote Text</label>
-            <textarea
-              className="form-control"
-              id="quoteText"
-              name="quoteText"
-              value={quote.quoteText}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="author" className="form-label">Author</label>
-            <input
-              type="text"
-              className="form-control"
-              id="author"
-              name="author"
-              value={quote.author}
-              onChange={handleChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">Create</button>
-        </form>
-        {message && <p className="mt-3">{message}</p>}
-      </div>
-    </div>
+    <Container>
+      <Card>
+        <CardContent>
+          <CardHeader>Create New Quote</CardHeader>
+          <Form onSubmit={handleSubmit}>
+            <div className='formdata'>
+              <Label htmlFor="quoteText" className="form-label">Quote Text</Label>
+              <FormTextArea
+                id="quoteText"
+                name="quoteText"
+                value={quote.quoteText}
+                onChange={handleChange}
+                required
+              />
+              <Label htmlFor="author" className="form-label">Author</Label>
+              <input
+                type="text"
+                id="author"
+                name="author"
+                value={quote.author}
+                onChange={handleChange}
+              />
+            </div>
+            <Button type="submit" color='green' style={{ display: 'block', margin: 'auto', marginTop: '10px' }}>
+              Create
+            </Button>
+          </Form>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
