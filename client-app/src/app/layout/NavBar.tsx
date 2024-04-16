@@ -9,7 +9,7 @@ export default function NavBar() {
                     Random Quote
                 </Menu.Item>
                 <Menu.Item>
-                    <Button as={NavLink} to='/createActivity' positive content='Add' />
+                    <Button as={NavLink} to='/add' positive content='Add' />
                 </Menu.Item>
             </Container>
         </Menu>

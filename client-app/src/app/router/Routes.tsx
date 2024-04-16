@@ -2,6 +2,7 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../../App";
 import RandomQuote from "../../feature/Homepage";
 import Homepage from "../../feature/Homepage";
+import AddQuote from "../../feature/AddQuote";
 
 export const routes: RouteObject[] = [
     {
@@ -9,7 +10,8 @@ export const routes: RouteObject[] = [
         element: <App />,
         children: [
             { path: 'Homepage', element: <Homepage />},
-            { path: 'random', element: <RandomQuote />}
+            { path: 'random', element: <RandomQuote />},
+            { path: 'add', element: <AddQuote />}
         ]
     }
 ]

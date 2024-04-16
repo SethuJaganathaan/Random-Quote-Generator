@@ -36,7 +36,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddQuote([FromForm] QuoteDTO quote)
+        public async Task<IActionResult> AddQuote(QuoteDTO quote)
         {
             var create = await _service.AddQuote(quote);
             return Ok(create);
