@@ -96,6 +96,23 @@ FROM OPENROWSET(BULK 'D:\zoro.jpg', SINGLE_BLOB) AS img;
 
 EXEC UserSignup @name, @mail, @pass, @profilepicture, @stat, @Rid, @extension;
 
+--SP For UserLogin
+CREATE PROC UserLogin
+	@email VARCHAR(20),
+	@Password VARCHAR(20)
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM Users WHERE email = @email AND Password = @Password)
+	BEGIN
+		SELECT 'LOGIN SUCCESSFUL' AS Result
+	END
+	ELSE
+	BEGIN
+		SELECT 'INVALID EMAIL OR PASSWORD' AS Result
+	END
+END
 
-
+DECLARE @email VARCHAR(255) = 'sanji@quote.com';
+DECLARE @password VARCHAR(255) = 'Sanji12';
+EXEC UserLogin  @email, @password;
 
