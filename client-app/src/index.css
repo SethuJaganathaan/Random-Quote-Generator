@@ -10,3 +10,19 @@
 .formdatta {
     margin-top: 1.5em;
 }
+
+html, body {
+    height: 100%;          
+    margin: 0;            
+    padding: 0;           
+    overflow-x: hidden;   
+  }
+  
+  body {
+    background-image: url('/Day.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  

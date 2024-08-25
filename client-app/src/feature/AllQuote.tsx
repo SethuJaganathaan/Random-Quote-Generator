@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardMeta, Container, Button } from "semantic-ui-react";
+import { Card, CardContent, CardDescription, CardMeta, Container, Button, Icon } from "semantic-ui-react";
 
 interface Quote {
     quoteId: string;
@@ -12,7 +12,7 @@ interface Quote {
 const AllQuote: React.FC = () => {
     const [quotes, setQuotes] = useState<Quote[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [quotesPerPage] = useState<number>(4);
+    const [quotesPerPage] = useState<number>(2);
 
     useEffect(() => {
         const fetchQuotes = async () => {
@@ -32,14 +32,24 @@ const AllQuote: React.FC = () => {
         fetchQuotes();
     }, []);
 
-    // Logic to get current quotes based on pagination
     const indexOfLastQuote = currentPage * quotesPerPage;
     const indexOfFirstQuote = indexOfLastQuote - quotesPerPage;
     const currentQuotes = quotes.slice(indexOfFirstQuote, indexOfLastQuote);
 
-    // Change page
     const paginate = (pageNumber: number) => {
         setCurrentPage(pageNumber);
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            paginate(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(quotes.length / quotesPerPage)) {
+            paginate(currentPage + 1);
+        }
     };
 
     return (
@@ -51,13 +61,19 @@ const AllQuote: React.FC = () => {
                         <p style={{ borderRadius: '10px', backgroundColor: '#f0f0f0', padding: '5px', marginTop: '10px' }}>{quote.author}</p>
                         <CardMeta>Date: {quote.createdAt}</CardMeta>
                     </CardContent>
+                    <CardContent>
+                        <Button positive content='Delete' />
+                    </CardContent>
                 </Card>
             ))}
-            {/* Pagination controls */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                {Array.from({ length: Math.ceil(quotes.length / quotesPerPage) }, (_, index) => (
-                    <Button key={index + 1} onClick={() => paginate(index + 1)}>{index + 1}</Button>
-                ))}
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+                <Button icon onClick={handlePrevPage} disabled={currentPage === 1}>
+                    <Icon name='chevron left' />
+                </Button>
+                <span style={{ margin: '0 10px' }}>{currentPage}</span>
+                <Button icon onClick={handleNextPage} disabled={currentPage >= Math.ceil(quotes.length / quotesPerPage)}>
+                    <Icon name='chevron right' />
+                </Button>
             </div>
         </Container>
     );
