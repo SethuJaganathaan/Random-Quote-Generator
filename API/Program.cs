@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<QuoteContext>(option => option
+builder.Services.AddDbContext<QuoteDbContext>(option => option
    .UseSqlServer(builder.Configuration.GetConnectionString("DataBaseConnectionString")));
 
 builder.Services.AddScoped<IQuoteRepository, QuoteRepository>();

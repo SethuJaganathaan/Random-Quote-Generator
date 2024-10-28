@@ -8,9 +8,9 @@ namespace Repository.Repositories
 {
     public class QuoteRepository : IQuoteRepository
     {
-        private readonly QuoteContext _dbContext;
+        private readonly QuoteDbContext _dbContext;
         private readonly IMapper _mapper;
-        public QuoteRepository(QuoteContext dbContext, IMapper mapper)
+        public QuoteRepository(QuoteDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -20,7 +20,7 @@ namespace Repository.Repositories
         {
             var quotes = _mapper.Map<Quote>(quote);
             quotes.QuoteId = Guid.NewGuid();
-            quotes.CreatedAt = DateTime.Now;
+            //quotes.CreatedAt = DateTime.Now;
 
             _dbContext.Quotes.Add(quotes);
 

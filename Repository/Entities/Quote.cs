@@ -10,10 +10,4 @@ public partial class Quote
     public string QuoteText { get; set; }
 
     public string Author { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public Guid? UserId { get; set; }
-
-    public virtual User User { get; set; }
 }
